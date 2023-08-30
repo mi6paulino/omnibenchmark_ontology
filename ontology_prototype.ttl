@@ -1,0 +1,119 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix omni: <http://omnibenchmark.org/ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+omni:Benchmark a rdfs:Class ;
+    rdfs:label "Benchmark" ;
+    rdfs:comment "A specific benchmarking process in the context of the
+Omnibenchmark project." .
+
+omni:Module a rdfs:Class ;
+    rdfs:label "Module" ;
+    rdfs:comment "A git (perhaps GitLab) repository the benchmarking process happens at." .
+
+# benchmark-related
+# perhaps define Deliverable a subclass of prov:Entity?
+omni:Deliverable a rdfs:Class ;
+    rdfs:label "Deliverable" ;
+    rdfs:comment "A traceable file generated during the omnibenchmarking benchmarking process" .
+    
+# tests this
+# https://schema.org/StructuredValue
+omni:NamedParameter a rdfs:Class ;
+    rdfs:subClassOf <https://schema.org/StructuredValue> ;
+    rdfs:label "NamedParameter" ;
+    rdfs:comment "A parameter tuple with key and value." .
+
+omni:ComputationalEnvironment a rdfs:Class ;
+    rdfs:label "ComputationalEnvironment" ;
+    rdfs:comment "Details of the host running the benchmark." .
+
+# properties
+
+omni:hasName a rdf:Property ;
+    rdfs:label "hasName" ;
+    rdfs:comment "The name of the benchmark." ;
+    rdfs:domain omni:Benchmark ;
+    rdfs:range xsd:string .
+    
+omni:hasEpoch a rdf:Property ;
+    rdfs:label "hasEpoch" ;
+    rdfs:comment "The epoch of the benchmark." ;
+    rdfs:domain omni:Benchmark ;
+    rdfs:range xsd:integer .
+    
+# run-related
+
+omni:BenchmarkRun a rdfs:Class ;
+    rdfs:label "BenchmarkRun" ;
+    rdfs:comment "A specific run of a benchmark method/metric/dataset/else during a certain epoch." ;
+    rdfs:subClassOf prov:Activity .
+
+omni:belongsTo a rdf:Property ;
+    rdfs:label "belongsTo" ;
+    rdfs:comment "Links a BenchmarkRun to its parent Benchmark." ;
+    rdfs:domain omni:BenchmarkRun ;
+    rdfs:range omni:Benchmark .
+
+# deliverables-related; some of them overlap renku's
+
+# overlaps renku ont
+omni:hasPlan a rdf:Property ;
+    rdfs:label "hasPlan" ;
+    rdfs:comment "Links a Deliverable to it's generating plan." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+# overlaps renku ont
+omni:hasActivity a rdf:Property ;
+    rdfs:label "hasActivity" ;
+    rdfs:comment "Links a Deliverable to its generating activity." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+    
+# sort of overlaps renku ont, but only for composite plans
+omni:hasNamedParameter a rdf:Property ;
+    rdfs:label "hasNamedParam" ;
+    rdfs:comment "Links a Deliverable to its (named) parameters." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range omni:NamedParameter .
+
+omni:hasDockerImage a rdf:Property ;
+    rdfs:label "hasDockerImage" ;
+    rdfs:comment "Links a Deliverable to its generating Docker Image." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+omni:hasModuleName a rdf:Property ;
+    rdfs:label "hasModuleName" ;
+    rdfs:comment "Links a Deliverable to its generating (gitlab) module ." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range omni:Module .
+
+omni:hasInputPath a rdf:Property ;
+    rdfs:label "hasInputPath" ;
+    rdfs:comment "Links a Deliverable to its (input) deliverable (path)" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+omni:hasComputationalEnvironment a rdf:Property ;
+    rdfs:label "hasComputationalEnvironment" ;
+    rdfs:comment "Links a Deliverable to its computing environment" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range omni:ComputationalEnvironment .
+
+omni:hasCommand rdf:Property ;
+    rdfs:label "hasCommand" ;
+    rdfs:comment "Full command leading to the generation of a Deliverable"
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+    
+
+# renku/omnibenchmark parameter and input/output naming
+# hasInputs
+# hasMappings
+# hasDataset
+
+# renku benchmarker vs method runner foaf
