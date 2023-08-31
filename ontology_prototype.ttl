@@ -32,82 +32,139 @@ omni:ComputationalEnvironment a rdfs:Class ;
 
 # properties
 
-omni:hasName a rdf:Property ;
-    rdfs:label "hasName" ;
+omni:name a rdfs:Property ;
+    rdfs:label "name" ;
     rdfs:comment "The name of the benchmark." ;
     rdfs:domain omni:Benchmark ;
     rdfs:range xsd:string .
     
-omni:hasEpoch a rdf:Property ;
-    rdfs:label "hasEpoch" ;
+omni:epoch a rdfs:Property ;
+    rdfs:label "epoch" ;
     rdfs:comment "The epoch of the benchmark." ;
     rdfs:domain omni:Benchmark ;
     rdfs:range xsd:integer .
     
 # run-related
 
-omni:BenchmarkRun a rdfs:Class ;
-    rdfs:label "BenchmarkRun" ;
-    rdfs:comment "A specific run of a benchmark method/metric/dataset/else during a certain epoch." ;
-    rdfs:subClassOf prov:Activity .
+# omni:BenchmarkRun a rdfs:Class ;
+#     rdfs:label "BenchmarkRun" ;
+#     rdfs:comment "A specific run of a benchmark method/metric/dataset/else during a certain epoch." ;
+#     rdfs:subClassOf prov:Activity .
 
-omni:belongsTo a rdf:Property ;
-    rdfs:label "belongsTo" ;
-    rdfs:comment "Links a BenchmarkRun to its parent Benchmark." ;
-    rdfs:domain omni:BenchmarkRun ;
+# omni:belongsTo a rdfs:Property ;
+#     rdfs:label "belongsTo" ;
+#     rdfs:comment "Links a BenchmarkRun to its parent Benchmark." ;
+#     rdfs:domain omni:BenchmarkRun ;
+#     rdfs:range omni:Benchmark .
+
+omni:benchark a rdfs:Property ;
+    rdfs:label "benchmark" ;
+    rdfs:comment "Links a benchmarking module to its benchmark." ;
+    rdfs:domain omni:Module ;
     rdfs:range omni:Benchmark .
+
+omni:keyword a rdfs:Property ;
+    rdfs:label "keyword" ;
+    rdfs:comment "Links a benchmarking module to its keywords." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
+
+omni:ciCdStage a rdfs:Property ;
+    rdfs:label "ciCdStage" ;
+    rdfs:comment "Links a benchmarking module to its benchmarking stage (orchestrator-wise)." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
 
 # deliverables-related; some of them overlap renku's
 
+# Git LFS storage is content addressable: content is stored against a key which is a SHA-256 hash of the content itself
+omni:lfsHash a rdfs:Property ;
+    rdfs:label "lfsHash" ;
+    rdfs:comment "Deliverable's GitLFS hash/id." ;    
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .    
+
+omni:module a rdfs:Property ;
+    rdfs:label "module" ;
+    rdfs:comment "Deliverable's module." ;    
+    rdfs:domain omni:Deliverable ;
+    rdfs:range omni:Module .
+    
 # overlaps renku ont
-omni:hasPlan a rdf:Property ;
-    rdfs:label "hasPlan" ;
+omni:plan a rdfs:Property ;
+    rdfs:label "plan" ;
     rdfs:comment "Links a Deliverable to it's generating plan." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .
 
 # overlaps renku ont
-omni:hasActivity a rdf:Property ;
-    rdfs:label "hasActivity" ;
+omni:activity a rdfs:Property ;
+    rdfs:label "activity" ;
     rdfs:comment "Links a Deliverable to its generating activity." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .
     
 # sort of overlaps renku ont, but only for composite plans
-omni:hasNamedParameter a rdf:Property ;
-    rdfs:label "hasNamedParam" ;
+omni:namedParameter a rdfs:Property ;
+    rdfs:label "namedParam" ;
     rdfs:comment "Links a Deliverable to its (named) parameters." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range omni:NamedParameter .
 
-omni:hasDockerImage a rdf:Property ;
-    rdfs:label "hasDockerImage" ;
+omni:dockerImage a rdfs:Property ;
+    rdfs:label "dockerImage" ;
     rdfs:comment "Links a Deliverable to its generating Docker Image." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .
 
-omni:hasModuleName a rdf:Property ;
-    rdfs:label "hasModuleName" ;
-    rdfs:comment "Links a Deliverable to its generating (gitlab) module ." ;
-    rdfs:domain omni:Deliverable ;
-    rdfs:range omni:Module .
-
-omni:hasInputPath a rdf:Property ;
-    rdfs:label "hasInputPath" ;
-    rdfs:comment "Links a Deliverable to its (input) deliverable (path)" ;
+omni:inputPath a rdfs:Property ;
+    rdfs:label "inputPath" ;
+    rdfs:comment "Links a Deliverable to its (input) deliverable (path)." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .
 
-omni:hasComputationalEnvironment a rdf:Property ;
-    rdfs:label "hasComputationalEnvironment" ;
-    rdfs:comment "Links a Deliverable to its computing environment" ;
+omni:computationalEnvironment a rdfs:Property ;
+    rdfs:label "computationalEnvironment" ;
+    rdfs:comment "Links a Deliverable to its computing environment." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range omni:ComputationalEnvironment .
 
-omni:hasCommand rdf:Property ;
-    rdfs:label "hasCommand" ;
-    rdfs:comment "Full command leading to the generation of a Deliverable"
+omni:command rdfs:Property ;
+    rdfs:label "command" ;
+    rdfs:comment "Full command leading to the generation of a Deliverable."
     rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+## before or after creating the deliverable?
+omni:preCommit rdfs:Property ;
+    rdfs:label "preCommit" ;
+    rdfs:comment "Repo commit (HEAD) before triggering the Deliverable generation."
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+omni:exitStatus rdfs:Property ;
+    rdfs:label "exitStatus" ;
+    rdfs:comment "For a given deliverable, activity (generating) script exit status" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:int .
+
+# likely overlapping renku's ontology
+omni:isInvalidated rdfs:Property ;
+    rdfs:label "isInvalidated" ;
+    rdfs:comment "Is the deliverable invalidated?" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:boolean .
+    
+# for epoch/tagging, has the git history been rebased (squashed)?
+omni:isRebased rdfs:Property ;
+    rdfs:label "isRebased" ;
+    rdfs:comment "During the plan(activities) exec: has the git history being rebased/squashed?" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:boolean .
+
+omni:fileName rdfs:Property ;
+    rdfs:label "fileName" ;
+    rdfs:comment "File name (generated deliverable)." ;
     rdfs:range xsd:string .
     
 

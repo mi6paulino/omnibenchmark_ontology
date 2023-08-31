@@ -1,0 +1,67 @@
+# @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix : <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix omni: <http://omnibenchmark.org/ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# :john a foaf:Person;
+#     foaf:gender "Male";
+#     foaf:name "John Smith", "Johnny Smith";
+#     foaf:knows :mary,
+#         [a foaf:Person;
+#         foaf:mbox <mailto:mary.smith@gmail.com>] .
+
+# :mary a foaf:Person;
+#     foaf:name "Mary Smith" .
+
+:benchmark1 a omni:Benchmark ;
+    omni:epoch "epoch1" ;
+    omni:name "benchmark1" .
+    
+    
+:data_module1 a omni:Module ;
+    omni:ciCdStage "data" ;
+    omni:keyword "keyword1", "keyword2" ;    
+    omni:benchmark "benchmark1" .
+    
+:deliverable_input1 a omni:Deliverable ;
+    omni:module "data_module1" ;    
+    omni:plan "plan_data_1" ;
+    omni:activty "activity_data_1" ;
+    omni:dockerImage "docker_data_1" ;
+    omni:computationalEnvironment "cenv_data_1" ;
+    omni:command "echo hello world > data.txt" ;
+    omni:preCommit "precommit_data_1" ;
+    omni:isInvalidated "False" ;
+    omni:exitStatus 0 ;
+    omni:isRebased "False" ;
+    omni:epoch "epoch1" ;
+    omni:lfsHash "lfshash_data_1.txt" ;    
+    omni:fileName "data.txt" .
+    
+:filt_module1 a omni:Module ;
+    omni:ciCdStage "filt1" ;
+    omni:keyword "keyword_filt1" ;
+    omni:benchmark "benchmark1" .
+
+:deliverable_filt1 a omni:Deliverable ;
+    omni:module "filt_module1" ;
+    omni:plan "plan_filt_1" ;
+    omni:activty "activity_filt_1" ;
+    omni:dockerImage "docker_filt_1" ;
+    omni:computationalEnvironment "cenv_filt_1" ;
+    omni:command "cut -f1 data.txt > data_filt.txt" ;
+    omni:preCommit "precommit_filt_1" ;
+    omni:isInvalidated "False" ;
+    omni:exitStatus 0 ;
+    omni:isRebased "False" ;    
+    omni:epoch "epoch1" ;
+    omni:lfsHash "lsfhash_data_filt_1.txt" ;
+    omni:fileName "data_filt.txt" .
+
+
+# what do we do with the explicit/implicit inputs/outputs?
+    
+
