@@ -1,3 +1,4 @@
+@prefix : <http://omnibenchmark.org/ns#>  .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix omni: <http://omnibenchmark.org/ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -6,8 +7,7 @@
 
 omni:Benchmark a rdfs:Class ;
     rdfs:label "Benchmark" ;
-    rdfs:comment "A specific benchmarking process in the context of the
-Omnibenchmark project." .
+    rdfs:comment "A specific benchmarking process in the context of the Omnibenchmark project." .
 
 omni:Module a rdfs:Class ;
     rdfs:label "Module" ;
@@ -24,7 +24,7 @@ omni:Deliverable a rdfs:Class ;
 omni:NamedParameter a rdfs:Class ;
     rdfs:subClassOf <https://schema.org/StructuredValue> ;
     rdfs:label "NamedParameter" ;
-    rdfs:comment "A parameter tuple with key and value." .
+    rdfs:comment "A parameter tuple with identifier and value." .
 
 omni:ComputationalEnvironment a rdfs:Class ;
     rdfs:label "ComputationalEnvironment" ;
@@ -38,11 +38,6 @@ omni:name a rdfs:Property ;
     rdfs:domain omni:Benchmark ;
     rdfs:range xsd:string .
     
-omni:epoch a rdfs:Property ;
-    rdfs:label "epoch" ;
-    rdfs:comment "The epoch of the benchmark." ;
-    rdfs:domain omni:Benchmark ;
-    rdfs:range xsd:integer .
     
 # run-related
 
@@ -69,6 +64,18 @@ omni:keyword a rdfs:Property ;
     rdfs:domain omni:Module ;
     rdfs:range xsd:string .
 
+omni:inputKeyword a rdfs:Property ;
+    rdfs:label "inputKeyword" ;
+    rdfs:comment "The input keyword(s), as defined by the config.yaml." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
+
+omni:parameterKeyword a rdfs:Property ;
+    rdfs:label "parameterKeyword" ;
+    rdfs:comment "The parameter keyword(s), as defined by the config.yaml." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
+    
 omni:ciCdStage a rdfs:Property ;
     rdfs:label "ciCdStage" ;
     rdfs:comment "Links a benchmarking module to its benchmarking stage (orchestrator-wise)." ;
@@ -76,6 +83,12 @@ omni:ciCdStage a rdfs:Property ;
     rdfs:range xsd:string .
 
 # deliverables-related; some of them overlap renku's
+
+omni:epoch a rdfs:Property ;
+    rdfs:label "epoch" ;
+    rdfs:comment "Deliverable's epoch." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:integer .
 
 # Git LFS storage is content addressable: content is stored against a key which is a SHA-256 hash of the content itself
 omni:lfsHash a rdfs:Property ;
@@ -103,7 +116,7 @@ omni:activity a rdfs:Property ;
     rdfs:comment "Links a Deliverable to its generating activity." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .
-    
+
 # sort of overlaps renku ont, but only for composite plans
 omni:namedParameter a rdfs:Property ;
     rdfs:label "namedParam" ;
@@ -129,48 +142,42 @@ omni:computationalEnvironment a rdfs:Property ;
     rdfs:domain omni:Deliverable ;
     rdfs:range omni:ComputationalEnvironment .
 
-omni:command rdfs:Property ;
+omni:command a rdfs:Property ;
     rdfs:label "command" ;
-    rdfs:comment "Full command leading to the generation of a Deliverable."
+    rdfs:comment "Full command leading to the generation of a Deliverable." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .
 
 ## before or after creating the deliverable?
-omni:preCommit rdfs:Property ;
+omni:preCommit a rdfs:Property ;
     rdfs:label "preCommit" ;
-    rdfs:comment "Repo commit (HEAD) before triggering the Deliverable generation."
+    rdfs:comment "Repo commit (HEAD) before triggering the Deliverable generation." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .
 
-omni:exitStatus rdfs:Property ;
+omni:exitStatus a rdfs:Property ;
     rdfs:label "exitStatus" ;
     rdfs:comment "For a given deliverable, activity (generating) script exit status" ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:int .
 
 # likely overlapping renku's ontology
-omni:isInvalidated rdfs:Property ;
+omni:isInvalidated a rdfs:Property ;
     rdfs:label "isInvalidated" ;
     rdfs:comment "Is the deliverable invalidated?" ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:boolean .
     
 # for epoch/tagging, has the git history been rebased (squashed)?
-omni:isRebased rdfs:Property ;
+omni:isRebased a rdfs:Property ;
     rdfs:label "isRebased" ;
     rdfs:comment "During the plan(activities) exec: has the git history being rebased/squashed?" ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:boolean .
 
-omni:fileName rdfs:Property ;
+omni:fileName a rdfs:Property ;
     rdfs:label "fileName" ;
     rdfs:comment "File name (generated deliverable)." ;
+    rdfs:domain omni:Deliverable ;    
     rdfs:range xsd:string .
     
-
-# renku/omnibenchmark parameter and input/output naming
-# hasInputs
-# hasMappings
-# hasDataset
-
-# renku benchmarker vs method runner foaf

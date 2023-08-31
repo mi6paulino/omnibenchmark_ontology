@@ -1,0 +1,23 @@
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX renku: <https://swissdatasciencecenter.github.io/renku-ontology#>
+PREFIX omni: <http://omnibenchmark.org/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+select ?deliverable ?module  ?epoch ?lfs ?kw ?ikw ?fn
+where {
+   ?deliverable a omni:Deliverable ;
+   	          omni:module ?module ;
+                  omni:epoch ?epoch ;
+                  omni:fileName ?fn  ;
+                  omni:lfsHash ?lfs .
+  ?mod2 a omni:Module ;
+                  omni:moduleName ?mod2name ;
+                  omni:inputKeyword ?ikw ;
+                  omni:keyword ?kw .                               
+  FILTER (?epoch="epoch1"^^xsd:string  && ?module = ?mod2name) 
+ 
+}
+ 
