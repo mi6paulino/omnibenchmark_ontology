@@ -10,6 +10,8 @@ We provide three components:
   - one method module
 - some SPARQL queries
 
+We still miss a system to generate these triples (while running omnibenchmark) and to send them to the triplestore.
+
 # Design philosophy
 
 - Keep it deliverable-centric (file-centric), because bioinformatics workflows typically are.
@@ -20,7 +22,7 @@ We provide three components:
 
 # Why
 
-(Sept 2023) We can retrieve parameters from renku's triples but not their names because we use plans and not composite plans. The relevant named key:value tuples are named `parametermaps` at https://swissdatasciencecenter.github.io/renku-ontology/webvowl/index.html .
+(Sept 2023) Renku's named key:value parameters are named `parametermaps` and only apply to compositeplans, not to plans.
 
 # Resources
 

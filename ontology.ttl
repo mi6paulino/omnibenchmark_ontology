@@ -89,8 +89,8 @@ omni:hasLfsHash a rdfs:Property ;
     rdfs:domain omni:Deliverable ;
     rdfs:range xsd:string .    
 
-omni:hasModule a rdfs:Property ;
-    rdfs:label "hasModule" ;
+omni:hasModuleName a rdfs:Property ;
+    rdfs:label "hasModuleName" ;
     rdfs:comment "Deliverable's module." ;    
     rdfs:domain omni:Deliverable ;
     rdfs:range omni:Module .
@@ -111,7 +111,7 @@ omni:hasActivity a rdfs:Property ;
 
 # sort of overlaps renku ont, but only for composite plans
 omni:hasNamedParameter a rdfs:Property ;
-    rdfs:label "hasNamedParam" ;
+    rdfs:label "hasNamedParameter" ;
     rdfs:comment "Links a Deliverable to its (named) parameters." ;
     rdfs:domain omni:Deliverable ;
     rdfs:range omni:NamedParameter .

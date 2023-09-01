@@ -19,7 +19,7 @@
     omni:belongsToBenchmark "benchmark1" .
     
 :deliverable_input1 a omni:Deliverable ;
-    omni:hasModule "data_module1" ;    
+    omni:hasModuleName "data_module1" ;    
     omni:hasPlan "plan_data1" ;
     omni:hasActivty "activity_data1" ;
     omni:hasDockerImage "docker_data1" ;
@@ -41,7 +41,7 @@
     omni:belongsToBenchmark "benchmark1" .
 
 :deliverable_filt1 a omni:Deliverable ;
-    omni:hasModule "filt_module1" ;
+    omni:hasModuleName "filt_module1" ;
     omni:hasPlan "plan_filt1" ;
     omni:hasActivty "activity_filt1" ;
     omni:hasDockerImage "docker_filt1" ;
@@ -63,7 +63,7 @@
     omni:belongsToBenchmark "benchmark1" .
 
 :deliverable_filt2 a omni:Deliverable ;
-    omni:hasModule "filt_module2" ;
+    omni:hasModuleName "filt_module2" ;
     omni:hasPlan "plan_filt2" ;
     omni:hasActivty "activity_filt2" ;
     omni:hasDockerImage "docker_filt2" ;
@@ -77,34 +77,52 @@
     omni:hasLfsHash "lsfhash_data_filt2.txt" ;
     omni:hasFileName "data_filt2.txt" .    
 
-:method_module a omni:Module ;
+:method_module1 a omni:Module ;
+    omni:hasModuleName "method_module1" ;    
     omni:hasCiCdStage "method" ;
     omni:hasInputKeyword "keyword_filt" ;    
     omni:hasKeyword "keyword_method" ;
     omni:belongsToBenchmark "benchmark1" .
 
-:deliverable_method a omni:Deliverable ;
-    omni:hasModuleName "method_module" ;
+:deliverable_method1 a omni:Deliverable ;
+    omni:hasModuleName "method_module1" ;
     omni:hasPlan "plan_method1" ;
     omni:hasActivty "activity_method1" ;
     omni:hasDockerImage "docker_method1" ;
     omni:hasComputationalEnvironment "cenv_method1" ;
-    omni:hasCommand "cut -f3 data.txt > data_method1.txt" ;
+    omni:hasCommand "cut -f3 data.txt someparams > data_method1.txt" ;
     omni:hasPreCommit "precommit_method1" ;
     omni:isInvalidated "False" ;
     omni:exitStatus 0 ;
     omni:isRebased "False" ;    
     omni:hasEpoch "epoch1" ;
-    omni:hasLfsHash "lsfhash_data_method1.txt" ;
-    omni:hasFileName "data_method1.txt" .
-
-:deliverable_method_param1 a omni:NamedParam ;
-    omni:appliesToDeliverable "deliverable_method" ;    
+    omni:hasLfsHash "lsfhash_data_method_param1.txt" ;
+    omni:hasNamedParameter "deliverable_method_param1" ;   
+    omni:hasFileName "data_method_param1.txt" .
+    
+:deliverable_method2 a omni:Deliverable ;
+    omni:hasModuleName "method_module1" ;
+    omni:hasPlan "plan_method1" ;
+    omni:hasActivty "activity_method2" ;
+    omni:hasDockerImage "docker_method1" ;
+    omni:hasComputationalEnvironment "cenv_method1" ;
+    omni:hasCommand "cut -f3 data.txt someparams > data_method1.txt" ;
+    omni:hasPreCommit "precommit_method1" ;
+    omni:isInvalidated "False" ;
+    omni:exitStatus 0 ;
+    omni:isRebased "False" ;    
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_method_param2.txt" ;
+    omni:hasNamedParameter "deliverable_method_param2" ;   
+    omni:hasFileName "data_method_param2.txt" .
+    
+:deliverable_method_param1 a omni:NamedParameter ;
+    omni:appliesToDeliverable "data_method_param1.txt" ;    
     omni:hasParameterName "param1_id"  ;    
     omni:hasParameterValue "param1_value" .
 
-:deliverable_method_param2 a omni:NamedParam ;
-    omni:appliesToDeliverable "deliverable_method" ;
+:deliverable_method_param2 a omni:NamedParameter ;
+    omni:appliesToDeliverableFilename "data_method_param2.txt" ;
     omni:hasParameterName "param2_id"  ;
     omni:hasParameterValue "param2_value" .
 
