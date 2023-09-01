@@ -6,117 +6,107 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-# :john a foaf:Person;
-#     foaf:gender "Male";
-#     foaf:name "John Smith", "Johnny Smith";
-#     foaf:knows :mary,
-#         [a foaf:Person;
-#         foaf:mbox <mailto:mary.smith@gmail.com>] .
-
-# :mary a foaf:Person;
-#     foaf:name "Mary Smith" .
-
 :benchmark1 a omni:Benchmark ;
     omni:epoch "epoch1" ;
-    omni:name "benchmark1" .
+    omni:benchmarkName "benchmark1" .
     
     
 :data_module1 a omni:Module ;
-    omni:moduleName "data_module1" ;
-    omni:ciCdStage "data" ;
-    omni:inputKeyword "none" ;    
-    omni:keyword "keyword_data1", "keyword_data2" ;    
-    omni:benchmark "benchmark1" .
+    omni:hasModuleName "data_module1" ;
+    omni:hasCiCdStage "data" ;
+    omni:hasInputKeyword "none" ;    
+    omni:hasKeyword "keyword_data1", "keyword_data2" ;    
+    omni:belongsToBenchmark "benchmark1" .
     
 :deliverable_input1 a omni:Deliverable ;
-    omni:module "data_module1" ;    
-    omni:plan "plan_data1" ;
-    omni:activty "activity_data1" ;
-    omni:dockerImage "docker_data1" ;
-    omni:computationalEnvironment "cenv_data1" ;
-    omni:command "echo hello world > data.txt" ;
-    omni:preCommit "precommit_data1" ;
+    omni:hasModule "data_module1" ;    
+    omni:hasPlan "plan_data1" ;
+    omni:hasActivty "activity_data1" ;
+    omni:hasDockerImage "docker_data1" ;
+    omni:hasComputationalEnvironment "cenv_data1" ;
+    omni:hasCommand "echo hello world > data.txt" ;
+    omni:hasPreCommit "precommit_data1" ;
     omni:isInvalidated "False" ;
     omni:exitStatus 0 ;
     omni:isRebased "False" ;
-    omni:epoch "epoch1" ;
-    omni:lfsHash "lfshash_data1.txt" ;    
-    omni:fileName "data.txt" .
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lfshash_data1.txt" ;    
+    omni:hasFileName "data.txt" .
     
 :filt_module1 a omni:Module ;
-    omni:moduleName "filt_module1" ;
-    omni:ciCdStage "filt" ;
-    omni:inputKeyword "keyword_data1" ;    
-    omni:keyword "keyword_filt" ;
-    omni:benchmark "benchmark1" .
+    omni:hasModuleName "filt_module1" ;
+    omni:hasCiCdStage "filt" ;
+    omni:hasInputKeyword "keyword_data1" ;    
+    omni:hasKeyword "keyword_filt" ;
+    omni:belongsToBenchmark "benchmark1" .
 
 :deliverable_filt1 a omni:Deliverable ;
-    omni:module "filt_module1" ;
-    omni:plan "plan_filt1" ;
-    omni:activty "activity_filt1" ;
-    omni:dockerImage "docker_filt1" ;
-    omni:computationalEnvironment "cenv_filt1" ;
-    omni:command "cut -f1 data.txt > data_filt.txt" ;
-    omni:preCommit "precommit_filt1" ;
+    omni:hasModule "filt_module1" ;
+    omni:hasPlan "plan_filt1" ;
+    omni:hasActivty "activity_filt1" ;
+    omni:hasDockerImage "docker_filt1" ;
+    omni:hascomputationalEnvironment "cenv_filt1" ;
+    omni:hasCommand "cut -f1 data.txt > data_filt.txt" ;
+    omni:hasPreCommit "precommit_filt1" ;
     omni:isInvalidated "False" ;
     omni:exitStatus 0 ;
     omni:isRebased "False" ;    
-    omni:epoch "epoch1" ;
-    omni:lfsHash "lsfhash_data_filt1.txt" ;
-    omni:fileName "data_filt.txt" .
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_filt1.txt" ;
+    omni:hasFileName "data_filt.txt" .
 
 :filt_module2 a omni:Module ;
-    omni:moduleName "filt_module2" ;    
-    omni:ciCdStage "filt" ;
-    omni:inputKeyword "keyword_data1" ;
-    omni:keyword "keyword_filt" ;
-    omni:benchmark "benchmark1" .
+    omni:hasModuleName "filt_module2" ;    
+    omni:hasCiCdStage "filt" ;
+    omni:hasInputKeyword "keyword_data1" ;
+    omni:hasKeyword "keyword_filt" ;
+    omni:belongsToBenchmark "benchmark1" .
 
 :deliverable_filt2 a omni:Deliverable ;
-    omni:module "filt_module2" ;
-    omni:plan "plan_filt2" ;
-    omni:activty "activity_filt2" ;
-    omni:dockerImage "docker_filt2" ;
-    omni:computationalEnvironment "cenv_filt2" ;
-    omni:command "cut -f3 data.txt > data_filt2.txt" ;
-    omni:preCommit "precommit_filt2" ;
+    omni:hasModule "filt_module2" ;
+    omni:hasPlan "plan_filt2" ;
+    omni:hasActivty "activity_filt2" ;
+    omni:hasDockerImage "docker_filt2" ;
+    omni:hasComputationalEnvironment "cenv_filt2" ;
+    omni:hasCommand "cut -f3 data.txt > data_filt2.txt" ;
+    omni:hasPreCommit "precommit_filt2" ;
     omni:isInvalidated "False" ;
-    omni:exitStatus 0 ;
+    omni:hasExitStatus 0 ;
     omni:isRebased "False" ;    
-    omni:epoch "epoch1" ;
-    omni:lfsHash "lsfhash_data_filt2.txt" ;
-    omni:fileName "data_filt2.txt" .    
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_filt2.txt" ;
+    omni:hasFileName "data_filt2.txt" .    
 
 :method_module a omni:Module ;
-    omni:ciCdStage "method" ;
-    omni:inputKeyword "keyword_filt" ;    
-    omni:keyword "keyword_method" ;
-    omni:benchmark "benchmark1" .
+    omni:hasCiCdStage "method" ;
+    omni:hasInputKeyword "keyword_filt" ;    
+    omni:hasKeyword "keyword_method" ;
+    omni:belongsToBenchmark "benchmark1" .
 
 :deliverable_method a omni:Deliverable ;
-    omni:module "method_module" ;
-    omni:plan "plan_method1" ;
-    omni:activty "activity_method1" ;
-    omni:dockerImage "docker_method1" ;
-    omni:computationalEnvironment "cenv_method1" ;
-    omni:command "cut -f3 data.txt > data_method1.txt" ;
-    omni:preCommit "precommit_method1" ;
+    omni:hasModuleName "method_module" ;
+    omni:hasPlan "plan_method1" ;
+    omni:hasActivty "activity_method1" ;
+    omni:hasDockerImage "docker_method1" ;
+    omni:hasComputationalEnvironment "cenv_method1" ;
+    omni:hasCommand "cut -f3 data.txt > data_method1.txt" ;
+    omni:hasPreCommit "precommit_method1" ;
     omni:isInvalidated "False" ;
     omni:exitStatus 0 ;
     omni:isRebased "False" ;    
-    omni:epoch "epoch1" ;
-    omni:lfsHash "lsfhash_data_method1.txt" ;
-    omni:fileName "data_method1.txt" .
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_method1.txt" ;
+    omni:hasFileName "data_method1.txt" .
 
 :deliverable_method_param1 a omni:NamedParam ;
-    omni:deliverable "deliverable_method" ;    
-    xsd:identifier "param1_id"  ;    
-    xsd:value "param1_value" .
+    omni:appliesToDeliverable "deliverable_method" ;    
+    omni:hasParameterName "param1_id"  ;    
+    omni:hasParameterValue "param1_value" .
 
 :deliverable_method_param2 a omni:NamedParam ;
-    omni:deliverable "deliverable_method" ;
-    xsd:identifier "param2_id"  ;    
-    xsd:value "param2_value" .
+    omni:appliesToDeliverable "deliverable_method" ;
+    omni:hasParameterName "param2_id"  ;
+    omni:hasParameterValue "param2_value" .
 
 
         

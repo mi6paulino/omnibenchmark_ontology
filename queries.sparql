@@ -6,18 +6,21 @@ PREFIX renku: <https://swissdatasciencecenter.github.io/renku-ontology#>
 PREFIX omni: <http://omnibenchmark.org/ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-select ?deliverable ?module  ?epoch ?lfs ?kw ?ikw ?fn
+select ?b ?module ?deliverable ?epoch ?lfs ?kw ?ikw ?fn ?params
 where {
    ?deliverable a omni:Deliverable ;
-   	          omni:module ?module ;
-                  omni:epoch ?epoch ;
-                  omni:fileName ?fn  ;
-                  omni:lfsHash ?lfs .
+   	          omni:hasModule ?module ;
+                  omni:hasEpoch ?epoch ;
+                  omni:hasFileName ?fn  ;
+                  omni:hasLfsHash ?lfs .
   ?mod2 a omni:Module ;
-                  omni:moduleName ?mod2name ;
-                  omni:inputKeyword ?ikw ;
-                  omni:keyword ?kw .                               
-  FILTER (?epoch="epoch1"^^xsd:string  && ?module = ?mod2name) 
+                  omni:belongsToBenchmark ?b ;
+                  omni:hasModuleName ?mod2name ;
+                  omni:hasInputKeyword ?ikw ;
+                  omni:hasKeyword ?kw .    
+  OPTIONAL {?params a omni:NamedParameter}
+  FILTER (?epoch="epoch1"^^xsd:string  &&
+          ?module = ?mod2name &&
+          ?b="benchmark1"^^xsd:string) 
  
 }
- 
