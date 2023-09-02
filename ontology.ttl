@@ -1,0 +1,194 @@
+@prefix : <http://omnibenchmark.org/ns#>  .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix omni: <http://omnibenchmark.org/ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# Classes ------------------------------------------------------------------------------
+
+omni:Benchmark a rdfs:Class ;
+    rdfs:label "Benchmark" ;
+    rdfs:comment "A specific benchmark in the context of Omnibenchmark." .
+
+omni:Module a rdfs:Class ;
+    rdfs:label "Module" ;
+    rdfs:comment "A git (perhaps GitLab) repository the benchmarking process happens at." .
+
+# benchmark-related
+# perhaps define Deliverable a subclass of prov:Entity?
+omni:Deliverable a rdfs:Class ;
+    rdfs:label "Deliverable" ;
+    rdfs:comment "A traceable file generated during the omnibenchmarking benchmarking process" .
+    
+# tests this
+# https://schema.org/StructuredValue
+omni:NamedParameter a rdfs:Class ;
+    rdfs:subClassOf <https://schema.org/StructuredValue> ;
+    rdfs:label "NamedParameter" ;
+    rdfs:comment "A parameter tuple with identifier and value." .
+
+omni:ComputationalEnvironment a rdfs:Class ;
+    rdfs:label "ComputationalEnvironment" ;
+    rdfs:comment "Details of the host running the benchmark." .
+
+# Benchmark properties -----------------------------------------------------------------
+
+omni:benchmarkName a rdfs:Property ;
+    rdfs:label "benchmarkName" ;
+    rdfs:comment "The name of the benchmark." ;
+    rdfs:domain omni:Benchmark ;
+    rdfs:range xsd:string .
+    
+
+# Module properties --------------------------------------------------------------------
+
+omni:belongsToBenchmark a rdfs:Property ;
+    rdfs:label "belongsToBenchmark" ;
+    rdfs:comment "Links a benchmarking module to its benchmark." ;
+    rdfs:domain omni:Module ;
+    rdfs:range omni:Benchmark .
+
+omni:hasKeyword a rdfs:Property ;
+    rdfs:label "hasKeyword" ;
+    rdfs:comment "Links a benchmarking module to its keywords." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
+
+omni:hasInputKeyword a rdfs:Property ;
+    rdfs:label "hasInputKeyword" ;
+    rdfs:comment "The input keyword(s), as defined by the config.yaml." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
+
+omni:hasParameterKeyword a rdfs:Property ;
+    rdfs:label "hasParameterKeyword" ;
+    rdfs:comment "The parameter keyword(s), as defined by the config.yaml." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
+    
+omni:hasCiCdStage a rdfs:Property ;
+    rdfs:label "ciCdStage" ;
+    rdfs:comment "Links a benchmarking module to its benchmarking stage (orchestrator-wise)." ;
+    rdfs:domain omni:Module ;
+    rdfs:range xsd:string .
+
+# Deliverable properties ---------------------------------------------------------------
+
+omni:hasEpoch a rdfs:Property ;
+    rdfs:label "hasEpoch" ;
+    rdfs:comment "Deliverable's epoch." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:integer .
+
+# Git LFS storage is content addressable: content is stored
+#  against a key which is a SHA-256 hash of the content itself
+omni:hasLfsHash a rdfs:Property ;
+    rdfs:label "hasLfsHash" ;
+    rdfs:comment "Deliverable's GitLFS hash/id." ;    
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .    
+
+omni:hasModuleName a rdfs:Property ;
+    rdfs:label "hasModuleName" ;
+    rdfs:comment "Deliverable's module." ;    
+    rdfs:domain omni:Deliverable ;
+    rdfs:range omni:Module .
+    
+# overlaps renku ont
+omni:hasPlan a rdfs:Property ;
+    rdfs:label "hasPlan" ;
+    rdfs:comment "Links a Deliverable to it's generating plan." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+# overlaps renku ont
+omni:hasActivity a rdfs:Property ;
+    rdfs:label "hasActivity" ;
+    rdfs:comment "Links a Deliverable to its generating activity." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+# sort of overlaps renku ont, but only for composite plans
+omni:hasNamedParameter a rdfs:Property ;
+    rdfs:label "hasNamedParameter" ;
+    rdfs:comment "Links a Deliverable to its (named) parameters." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range omni:NamedParameter .
+
+omni:hasDockerImage a rdfs:Property ;
+    rdfs:label "hasDockerImage" ;
+    rdfs:comment "Links a Deliverable to its generating Docker Image." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+omni:hasInputPath a rdfs:Property ;
+    rdfs:label "hasInputPath" ;
+    rdfs:comment "Links a Deliverable to its (input) deliverable (path)." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+omni:hasComputationalEnvironment a rdfs:Property ;
+    rdfs:label "hasComputationalEnvironment" ;
+    rdfs:comment "Links a Deliverable to its computing environment." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range omni:ComputationalEnvironment .
+
+omni:hasCommand a rdfs:Property ;
+    rdfs:label "hasCommand" ;
+    rdfs:comment "Full command leading to the generation of a Deliverable." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+## before or after creating the deliverable?
+omni:hasPreCommit a rdfs:Property ;
+    rdfs:label "hasPreCommit" ;
+    rdfs:comment "Repo commit (HEAD) before triggering the Deliverable generation." ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:string .
+
+omni:hasExitStatus a rdfs:Property ;
+    rdfs:label "hasExitStatus" ;
+    rdfs:comment "For a given deliverable, activity (generating) script exit status" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:int .
+
+# likely overlapping renku's ontology
+omni:isInvalidated a rdfs:Property ;
+    rdfs:label "isInvalidated" ;
+    rdfs:comment "Is the deliverable invalidated?" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:boolean .
+    
+# for epoch/tagging, has the git history been rebased (squashed)?
+omni:isRebased a rdfs:Property ;
+    rdfs:label "isRebased" ;
+    rdfs:comment "During the plan(activities) exec: has the git history being rebased/squashed?" ;
+    rdfs:domain omni:Deliverable ;
+    rdfs:range xsd:boolean .
+
+omni:hasFileName a rdfs:Property ;
+    rdfs:label "hasFileName" ;
+    rdfs:comment "File name (generated deliverable)." ;
+    rdfs:domain omni:Deliverable ;    
+    rdfs:range xsd:string .
+    
+# Parameter properties -----------------------------------
+
+omni:hasParameterName a rdfs:Property ;
+    rdfs:label "hasParameterName" ;
+    rdfs:comment "Parameter name/key" ;
+    rdfs:domain omni:NamedParameter ;    
+    rdfs:range xsd:string .
+
+omni:hasParameterValue a rdfs:Property ;
+    rdfs:label "hasParameterValue" ;
+    rdfs:comment "Parameter value" ;
+    rdfs:domain omni:NamedParameter ;    
+    rdfs:range xsd:string .
+
+omni:appliesToDeliverable a rdfs:Property ;
+    rdfs:label "appliesToDeliverable" ;
+    rdfs:comment "The deliverable filename generated with the NamedParameter." ;    
+    rdfs:domain omni:NamedParameter ;    
+    rdfs:range xsd:string .

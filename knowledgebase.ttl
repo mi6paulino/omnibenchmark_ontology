@@ -1,0 +1,131 @@
+# @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix : <http://omnibenchmark.org/ns#>  .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix omni: <http://omnibenchmark.org/ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+:benchmark1 a omni:Benchmark ;
+    omni:epoch "epoch1" ;
+    omni:benchmarkName "benchmark1" .
+    
+    
+:data_module1 a omni:Module ;
+    omni:hasModuleName "data_module1" ;
+    omni:hasCiCdStage "data" ;
+    omni:hasInputKeyword "none" ;    
+    omni:hasKeyword "keyword_data1", "keyword_data2" ;    
+    omni:belongsToBenchmark "benchmark1" .
+    
+:deliverable_input1 a omni:Deliverable ;
+    omni:hasModuleName "data_module1" ;    
+    omni:hasPlan "plan_data1" ;
+    omni:hasActivity "activity_data1" ;
+    omni:hasDockerImage "docker_data1" ;
+    omni:hasComputationalEnvironment "cenv_data1" ;
+    omni:hasCommand "echo hello world > data.txt" ;
+    omni:hasPreCommit "precommit_data1" ;
+    omni:isInvalidated "False" ;
+    omni:exitStatus 0 ;
+    omni:isRebased "False" ;
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lfshash_data1.txt" ;    
+    omni:hasFileName "data.txt" .
+    
+:filt_module1 a omni:Module ;
+    omni:hasModuleName "filt_module1" ;
+    omni:hasCiCdStage "filt" ;
+    omni:hasInputKeyword "keyword_data1" ;    
+    omni:hasKeyword "keyword_filt" ;
+    omni:belongsToBenchmark "benchmark1" .
+
+:deliverable_filt1 a omni:Deliverable ;
+    omni:hasModuleName "filt_module1" ;
+    omni:hasPlan "plan_filt1" ;
+    omni:hasActivity "activity_filt1" ;
+    omni:hasDockerImage "docker_filt1" ;
+    omni:hascomputationalEnvironment "cenv_filt1" ;
+    omni:hasCommand "cut -f1 data.txt > data_filt.txt" ;
+    omni:hasPreCommit "precommit_filt1" ;
+    omni:isInvalidated "False" ;
+    omni:exitStatus 0 ;
+    omni:isRebased "False" ;    
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_filt1.txt" ;
+    omni:hasFileName "data_filt.txt" .
+
+:filt_module2 a omni:Module ;
+    omni:hasModuleName "filt_module2" ;    
+    omni:hasCiCdStage "filt" ;
+    omni:hasInputKeyword "keyword_data1" ;
+    omni:hasKeyword "keyword_filt" ;
+    omni:belongsToBenchmark "benchmark1" .
+
+:deliverable_filt2 a omni:Deliverable ;
+    omni:hasModuleName "filt_module2" ;
+    omni:hasPlan "plan_filt2" ;
+    omni:hasActivity "activity_filt2" ;
+    omni:hasDockerImage "docker_filt2" ;
+    omni:hasComputationalEnvironment "cenv_filt2" ;
+    omni:hasCommand "cut -f3 data.txt > data_filt2.txt" ;
+    omni:hasPreCommit "precommit_filt2" ;
+    omni:isInvalidated "False" ;
+    omni:hasExitStatus 0 ;
+    omni:isRebased "False" ;    
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_filt2.txt" ;
+    omni:hasFileName "data_filt2.txt" .    
+
+:method_module1 a omni:Module ;
+    omni:hasModuleName "method_module1" ;    
+    omni:hasCiCdStage "method" ;
+    omni:hasInputKeyword "keyword_filt" ;    
+    omni:hasKeyword "keyword_method" ;
+    omni:belongsToBenchmark "benchmark1" .
+
+:deliverable_method1 a omni:Deliverable ;
+    omni:hasModuleName "method_module1" ;
+    omni:hasPlan "plan_method1" ;
+    omni:hasActivity "activity_method1" ;
+    omni:hasDockerImage "docker_method1" ;
+    omni:hasComputationalEnvironment "cenv_method1" ;
+    omni:hasCommand "cut -f3 data.txt someparams > data_method1.txt" ;
+    omni:hasPreCommit "precommit_method1" ;
+    omni:isInvalidated "False" ;
+    omni:exitStatus 0 ;
+    omni:isRebased "False" ;    
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_method_param1.txt" ;
+    omni:hasNamedParameter "deliverable_method_param1" ;   
+    omni:hasFileName "data_method_param1.txt" .
+    
+:deliverable_method2 a omni:Deliverable ;
+    omni:hasModuleName "method_module1" ;
+    omni:hasPlan "plan_method1" ;
+    omni:hasActivity "activity_method2" ;
+    omni:hasDockerImage "docker_method1" ;
+    omni:hasComputationalEnvironment "cenv_method1" ;
+    omni:hasCommand "cut -f3 data.txt someparams > data_method1.txt" ;
+    omni:hasPreCommit "precommit_method1" ;
+    omni:isInvalidated "False" ;
+    omni:exitStatus 0 ;
+    omni:isRebased "False" ;    
+    omni:hasEpoch "epoch1" ;
+    omni:hasLfsHash "lsfhash_data_method_param2.txt" ;
+    omni:hasNamedParameter "deliverable_method_param2" ;   
+    omni:hasFileName "data_method_param2.txt" .
+    
+:deliverable_method_param1 a omni:NamedParameter ;
+    omni:appliesToDeliverable "data_method_param1.txt" ;    
+    omni:hasParameterName "param1_id"  ;    
+    omni:hasParameterValue "param1_value" .
+
+:deliverable_method_param2 a omni:NamedParameter ;
+    omni:appliesToDeliverableFilename "data_method_param2.txt" ;
+    omni:hasParameterName "param2_id"  ;
+    omni:hasParameterValue "param2_value" .
+
+
+        
+        
