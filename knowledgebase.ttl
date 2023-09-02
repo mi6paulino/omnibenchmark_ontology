@@ -21,7 +21,7 @@
 :deliverable_input1 a omni:Deliverable ;
     omni:hasModuleName "data_module1" ;    
     omni:hasPlan "plan_data1" ;
-    omni:hasActivty "activity_data1" ;
+    omni:hasActivity "activity_data1" ;
     omni:hasDockerImage "docker_data1" ;
     omni:hasComputationalEnvironment "cenv_data1" ;
     omni:hasCommand "echo hello world > data.txt" ;
@@ -43,7 +43,7 @@
 :deliverable_filt1 a omni:Deliverable ;
     omni:hasModuleName "filt_module1" ;
     omni:hasPlan "plan_filt1" ;
-    omni:hasActivty "activity_filt1" ;
+    omni:hasActivity "activity_filt1" ;
     omni:hasDockerImage "docker_filt1" ;
     omni:hascomputationalEnvironment "cenv_filt1" ;
     omni:hasCommand "cut -f1 data.txt > data_filt.txt" ;
@@ -65,7 +65,7 @@
 :deliverable_filt2 a omni:Deliverable ;
     omni:hasModuleName "filt_module2" ;
     omni:hasPlan "plan_filt2" ;
-    omni:hasActivty "activity_filt2" ;
+    omni:hasActivity "activity_filt2" ;
     omni:hasDockerImage "docker_filt2" ;
     omni:hasComputationalEnvironment "cenv_filt2" ;
     omni:hasCommand "cut -f3 data.txt > data_filt2.txt" ;
@@ -87,7 +87,7 @@
 :deliverable_method1 a omni:Deliverable ;
     omni:hasModuleName "method_module1" ;
     omni:hasPlan "plan_method1" ;
-    omni:hasActivty "activity_method1" ;
+    omni:hasActivity "activity_method1" ;
     omni:hasDockerImage "docker_method1" ;
     omni:hasComputationalEnvironment "cenv_method1" ;
     omni:hasCommand "cut -f3 data.txt someparams > data_method1.txt" ;
@@ -103,7 +103,7 @@
 :deliverable_method2 a omni:Deliverable ;
     omni:hasModuleName "method_module1" ;
     omni:hasPlan "plan_method1" ;
-    omni:hasActivty "activity_method2" ;
+    omni:hasActivity "activity_method2" ;
     omni:hasDockerImage "docker_method1" ;
     omni:hasComputationalEnvironment "cenv_method1" ;
     omni:hasCommand "cut -f3 data.txt someparams > data_method1.txt" ;
