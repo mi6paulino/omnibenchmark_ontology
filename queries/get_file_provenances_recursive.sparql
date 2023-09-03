@@ -1,0 +1,19 @@
+# get file provenances, recursive
+
+PREFIX omni: <http://omnibenchmark.org/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+select ?target_module_name ?target_kw ?recursive_module_name ?kw ?predecessor_module_name
+where {
+  ?target_module a omni:Module ;
+    omni:hasModuleName ?target_module_name ;	
+  	omni:hasKeyword ?target_kw .
+  ?recursive_module a omni:Module ;
+        omni:hasModuleName ?recursive_module_name ;	
+  	omni:hasInputKeyword ?kw .
+  ?predecessor_module a omni:Module ;
+   omni:hasModuleName ?predecessor_module_name ;
+  	omni:hasKeyword+ ?kw .	
+  
+  filter (?target_module_name = "method_module1"^^xsd:string )
+}

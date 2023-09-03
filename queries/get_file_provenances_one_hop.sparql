@@ -1,0 +1,22 @@
+# get file provenances (one hop back), via module's keywords
+
+PREFIX omni: <http://omnibenchmark.org/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+select ?ikw1 ?pre_mod ?pre_fn ?post_mod ?post_fn
+where {
+  ?module_pre a omni:Module ;
+  omni:hasModuleName ?pre_mod ;
+                      omni:hasKeyword ?ikw1 .
+  ?module_post a omni:Module;
+                 omni:hasModuleName ?post_mod ;
+                 omni:hasInputKeyword ?ikw1 .
+
+  ?d_pre a omni:Deliverable ;
+                 omni:hasModuleName ?pre_mod ;
+                 omni:hasFileName ?pre_fn .
+  ?d_post a omni:Deliverable ;
+                 omni:hasModuleName ?post_mod ;
+                 omni:hasFileName ?post_fn .
+   
+}

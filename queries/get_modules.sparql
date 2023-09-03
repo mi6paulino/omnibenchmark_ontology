@@ -1,0 +1,16 @@
+# query modules from benchmark1
+
+PREFIX omni: <http://omnibenchmark.org/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+select ?b ?mod ?mod2name
+where {
+
+  ?mod a omni:Module ;
+                  omni:belongsToBenchmark ?b;
+                  omni:hasModuleName ?mod2name ;
+                  omni:hasInputKeyword ?ikw ;
+                  omni:hasKeyword ?kw .    
+  FILTER (?b="benchmark1"^^xsd:string)
+ 
+}

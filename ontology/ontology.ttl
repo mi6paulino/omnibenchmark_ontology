@@ -68,7 +68,7 @@ omni:hasParameterKeyword a rdfs:Property ;
     rdfs:range xsd:string .
     
 omni:hasCiCdStage a rdfs:Property ;
-    rdfs:label "ciCdStage" ;
+    rdfs:label "hasCiCdStage" ;
     rdfs:comment "Links a benchmarking module to its benchmarking stage (orchestrator-wise)." ;
     rdfs:domain omni:Module ;
     rdfs:range xsd:string .

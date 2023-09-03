@@ -1,0 +1,18 @@
+# query deliverables and their epochs for modules belonging to benchmark1
+
+PREFIX omni: <http://omnibenchmark.org/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+select ?b ?module ?deliverable ?epoch  ?fn 
+where {
+   ?deliverable a omni:Deliverable ;
+   	          omni:hasModuleName ?module ;
+                  omni:hasEpoch ?epoch ;
+                  omni:hasFileName ?fn  .
+  ?mod2 a omni:Module ;
+                  omni:belongsToBenchmark ?b;
+                  omni:hasModuleName ?mod2name .    
+  FILTER (?epoch="epoch1"^^xsd:string  &&
+          ?module = ?mod2name &&
+          ?b="benchmark1"^^xsd:string)  
+}
