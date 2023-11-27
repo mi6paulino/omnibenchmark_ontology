@@ -1,9 +1,10 @@
-# get file provenances, recursive
+# get file provenances, recursive; here filtering for module "irirs_summary_metrics" ancestors
 
 PREFIX omni: <http://omnibenchmark.org/ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-select ?target_module_name ?target_kw ?recursive_module_name ?kw ?predecessor_module_name
+select ?target_module_name ?target_kw ?recursive_module_name ?kw ?predecessor_module_name ?pre_fn ?post_fn
+
 where {
   ?target_module a omni:Module ;
     omni:hasModuleName ?target_module_name ;	
@@ -13,7 +14,12 @@ where {
   	omni:hasInputKeyword ?kw .
   ?predecessor_module a omni:Module ;
    omni:hasModuleName ?predecessor_module_name ;
-  	omni:hasKeyword+ ?kw .	
-  
-  filter (?target_module_name = "method_module1"^^xsd:string )
+  	omni:hasKeyword+ ?kw .
+
+  ?d_pre a omni:Deliverable ;
+                 omni:hasModuleName ?predecessor_module_name;
+                 omni:hasInputPath ?pre_fn ;
+                 omni:hasFileName ?post_fn .
+    
+  filter (?target_module_name = "irirs_summary_metrics"^^xsd:string )
 }
