@@ -4,10 +4,11 @@ This is an ontology to annotate omnibenchmark runs.
 
 We provide three components:
 - the [ontology](ontology/ontology.ttl) formalization (turtle)
-- an example [knowledgebase](knowledgebase/knowledgebase.ttl) (turtle) with a simplified setup:
+- an example [knowledgebase](knowledgebase/knowledgebase_noname.ttl) (turtle) with a simplified setup:
   - one data module
   - two filtering modules
   - one method module, run with different parameters
+- another (more realistic) example, the [the iris-example knowledgebase](knowledgebase/knowledgebase_iris.ttl) somewhat resembling the omnibenchmark named [iris-example](https://gitlab.renkulab.io/omnibenchmark/iris_example)
 - some [SPARQL queries](queries), including:
   - `get_deliverables_by_activity.sparql`
   - `get_deliverables_by_epoch.sparql`

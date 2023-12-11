@@ -17,8 +17,7 @@ where {
                   omni:hasKeyword ?kw .    
   OPTIONAL {?params a omni:NamedParameter;
                   omni:hasParameterName ?pn ;
-                  omni:hasParameterValue ?pv ;
-                  omni:appliesToDeliverable ?param_targetfn }
+                  omni:hasParameterValue ?pv }
   
   FILTER (?epoch="epoch1"^^xsd:string  &&
           ?module = ?mod2name &&
