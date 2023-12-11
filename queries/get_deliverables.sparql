@@ -1,4 +1,4 @@
-# query deliverables with parameters from benchmark1
+# query deliverables without specifying parameters from benchmark `iris_example`
 
 PREFIX omni: <http://omnibenchmark.org/ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -6,22 +6,22 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 select ?b ?module ?mod2name ?deliverable ?epoch ?kw ?ikw ?fn ?pn ?pv
 where {
    ?deliverable a omni:Deliverable ;
-   	          omni:hasModuleName ?module ;
+   	            omni:hasModuleName ?module ;
                   omni:hasEpoch ?epoch ;
                   omni:hasFileName ?fn  ;
                   omni:hasLfsHash ?lfs .
+
   ?mod2 a omni:Module ;
                   omni:belongsToBenchmark ?b;
                   omni:hasModuleName ?mod2name ;
                   omni:hasInputKeyword ?ikw ;
-                  omni:hasKeyword ?kw .    
+                  omni:hasKeyword ?kw . 
+ 
   OPTIONAL {?params a omni:NamedParameter;
                   omni:hasParameterName ?pn ;
-                  omni:hasParameterValue ?pv }
+                  omni:hasParameterValue ?pv } 
   
-  FILTER (?epoch="epoch1"^^xsd:string  &&
-          ?module = ?mod2name &&
-          ?b="benchmark1"^^xsd:string &&
-    	  ?fn = ?param_targetfn
-          )  
+  FILTER (?module = ?mod2name &&
+          ?b="iris_example"^^xsd:string &&
+          ?epoch="epoch1"^^xsd:string) 
 }
